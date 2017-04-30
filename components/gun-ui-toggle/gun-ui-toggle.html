@@ -1,0 +1,105 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../gun-ui-mixin/gun-ui-mixin.html">
+<link rel="import" href="../paper-toggle-button/paper-toggle-button.html">
+<!--
+`gun-ui-toggle`
+Part of the GunUi elements
+
+@demo demo/index.html
+-->
+
+<dom-module id="gun-ui-toggle">
+  <template>
+    <style>
+      :host {display: block;}
+    
+        
+      paper-toggle-button {
+        --paper-toggle-button-unchecked-bar-color:var(--gun-ui-toggle-unchecked-bar-color); 
+        --paper-toggle-button-unchecked-button-color:var(--gun-ui-toggle-unchecked-button-color); 
+        --paper-toggle-button-unchecked-ink-color:var(--gun-ui-toggle-unchecked-ink-color); 
+        --paper-toggle-button-checked-bar-color:var(--gun-ui-toggle-checked-bar-color); 
+        --paper-toggle-button-checked-button-color:var(--gun-ui-toggle-hecked-button-color); 
+        --paper-toggle-button-checked-ink-color:var(--gun-ui-toggle-checked-ink-color); 
+        --paper-toggle-button-invalid-bar-color:var(--gun-ui-toggle-invalid-bar-color); 
+        --paper-toggle-button-invalid-button-color:var(--gun-ui-toggle-invalid-button-color); 
+        --paper-toggle-button-invalid-ink-color :var(--gun-ui-toggle-invalid-ink-color); 
+        --paper-toggle-button-unchecked-bar:var(--gun-ui-toggle-unchecked-bar); 
+        --paper-toggle-button-unchecked-button :var(--gun-ui-toggle-unchecked-button); 
+        --paper-toggle-button-unchecked-ink :var(--gun-ui-toggle-unchecked-ink); 
+        --paper-toggle-button-checked-bar :var(--gun-ui-toggle-checked-bar); 
+        --paper-toggle-button-checked-button:var(--gun-ui-toggle-checked-button); 
+        --paper-toggle-button-checked-ink:var(--gun-ui-toggle-checked-ink); 
+        --paper-toggle-button-label-color:var(--gun-ui-toggle-label-color); 
+        --paper-toggle-button-label-spacing:var(--gun-ui-toggle-label-spacing); 
+      }
+    </style>
+    <paper-toggle-button
+     disabled$="[[disabled]]"
+     noink$="[[noink]]"
+     checked="{{checked}}"
+     invalid="[[invalid]]"
+     on-change="_userAction">
+     <slot></slot>
+    </paper-toggle-button>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'gun-ui-toggle',
+
+      properties: {
+        disabled: {
+          type: Boolean,
+          value: false
+        },
+        noink:{
+          type: Boolean,
+          value: false
+        },
+        checked:{
+          type: Boolean,
+          value: false,
+        },
+        invalid:{
+          type: Boolean,
+          value: false,
+        }
+
+      },
+      behaviors:[Polymer.GunUiMixin],
+      ready() {
+        this.subscribe ? this._subscribe() : this._getCurrent()
+      },
+       _subscribe() {
+        if(this.soul && this.prop) {
+         this._on({soul:this.soul,prop:this.prop},(c)=>{
+             this.checked = c ? c :false
+          })
+
+        } else {
+          console.warn('You have no soul and/or prop set !!');
+        };
+      },
+      _getCurrent(){
+       this._read({soul:this.soul,prop:this.prop})
+            .then( (value) => {
+              this.checked = value ? value:false;
+            })     
+      },
+      _userAction(e){
+        this.setValue(e.target.checked)
+       
+      },
+      /* update Gun */
+      setValue(val) {
+        if(this.soul) {
+          this._update({soul:this.soul,prop:this.prop,data:val})
+        };
+      },
+
+
+    });
+  </script>
+</dom-module>

@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <script src="https://rawgit.com/amark/gun/master/gun.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>gun-ui-toggle</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script>
+      window.Polymer = window.Polymer || {};
+      window.Polymer.dom = 'shadow';
+      localStorage.clear()
+    </script>
+    <link rel="import" href="../../polymer/polymer.html">
+    <link rel="import" href="../../gunui-demo-app/gunui-demo-app.html">
+    <link rel="import" href="../../gunui-demo-app/demo/demo-imports.html">
+    <link rel="import" href="../gun-ui-toggle.html">
+    <style is="custom-style" include="demo-shared-styles">
+          :root{ }
+          body{
+            overflow:hidden;
+          }
+         
+         
+    </style>
+    
+    
+  </head>
+  <body>
+  <prism-highlighter></prism-highlighter>
+    <style is="custom-style" include="demo-shared-styles">
+     demo-box {
+            min-width:300px;
+          }
+            .row > gun-ui-toggle {
+          margin: 10px;
+        }
+    </style>
+
+    <gunui-demo-app>
+      <!-- create pages -->
+      <div class="vertical-section centered" id="start">
+         <h3>What it does</h3>
+         <div class="row"><span>It's a &nbsp;</span><gun-ui-toggle soul="demo" prop="toggle" subscribe></gun-ui-toggle><span>...that syncs</span>&nbsp;<gun-ui-toggle  soul="demo" prop="toggle" subscribe></gun-ui-toggle><span>  with Gun</span></div>
+      </div>
+    
+        <div class="vertical-section" id="instant">
+
+          <div class="demo-header">
+            <p>Both <prism-demo inline code="<gun-ui-checkbox>" lang="html"></prism-demo> elements are subscribed to the same property<br>( and the ones above )</p>
+             <blockquote>
+             The attributes <span class="attribute">soul</span> and <span class="attribute">prop</span> will link the element to a data-point.<br>
+             The attribute <span class="attribute">subscribe</span> is what makes it 'Gun-aware'
+             you can read more about it <demo-link href="?gunui#gun-awareness">here</demo-link>
+           </blockquote> 
+          
+          </div>
+          <div class="row">
+            <demo-box>
+              <template>
+                <gun-ui-toggle  soul="demo" prop="toggle" subscribe></gun-ui-toggle>
+              </template>
+            </demo-box>
+             <demo-box>
+            <template>
+              <gun-ui-toggle  soul="demo" prop="toggle" subscribe></gun-ui-toggle>
+            </template>
+          </demo-box>
+          </div>
+        </div>
+        
+      <div class="vertical-section centered" id="start">
+        <h3>Toggle buttons can be checked and disabled</h3>
+        <demo-box>
+        <template>
+         <div class='row'>
+          <gun-ui-toggle soul="demo" prop="toggle" subscribe>Toggle</gun-ui-toggle>
+          <gun-ui-toggle disabled soul="demo" prop="toggle" subscribe>Disabled</gun-ui-toggle>
+          <gun-ui-toggle invalid soul="demo" prop="toggle" subscribe>Invalid</gun-ui-toggle>
+        </div>
+        </template>
+
+        </demo-box>
+      </div>  
+
+      <div class="vertical-section centered" id="start">
+          <h3>Toggle buttons can hide the ripple effect using the <i>noink</i> attribute</h3>
+        <demo-box>
+          <template>
+          <gun-ui-toggle noink soul="demo" prop="toggle" subscribe>Toggle</gun-ui-toggle>
+        </template>
+
+        </demo-box>
+      </div>  
+
+      <div class="vertical-section centered" id="start">
+        <h3>Toggle buttons can be styled using custom properties</h3>
+      <demo-box>
+        <template>
+          <style is="custom-style">
+            gun-ui-toggle.green {
+              --gun-ui-toggle-checked-bar-color:  var(--paper-green-500);
+              --gun-ui-toggle-checked-button-color:  var(--paper-green-500);
+              --gun-ui-toggle-checked-ink-color: var(--paper-green-500);
+              --gun-ui-toggle-unchecked-bar-color:  var(--paper-teal-500);
+              --gun-ui-toggle-unchecked-button-color:  var(--paper-teal-500);
+              --gun-ui-toggle-unchecked-ink-color: var(--paper-teal-500);
+            }
+            gun-ui-toggle.pink {
+              --gun-ui-toggle-checked-bar-color:  var(--paper-pink-500);
+              --gun-ui-toggle-checked-button-color:  var(--paper-pink-500);
+              --gun-ui-toggle-checked-ink-color: var(--paper-pink-500);
+              --gun-ui-toggle-unchecked-bar-color:  var(--paper-indigo-900);
+              --gun-ui-toggle-unchecked-button-color:  var(--paper-indigo-900);
+              --gun-ui-toggle-unchecked-ink-color: var(--paper-indigo-900);
+            }
+          </style>
+          <div class='row'>
+          <gun-ui-toggle class="green" soul="demo" prop="toggle" subscribe>Toggle</gun-ui-toggle>
+          <gun-ui-toggle checked class="pink" soul="demo" prop="toggle" subscribe>Toggle</gun-ui-toggle>
+          </div>
+        </template>
+      </demo-box>
+
+
+    </gunui-demo-app>
+  </body>
+</html>
+
+
